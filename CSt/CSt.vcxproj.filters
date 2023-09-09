@@ -27,9 +27,6 @@
     <ClCompile Include="reflection.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reference.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="graph.h">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -136,7 +136,6 @@
     <ClCompile Include="Coroutine.cpp" />
     <ClCompile Include="graph.h" />
     <ClCompile Include="Print.h" />
-    <ClCompile Include="reference.cpp" />
     <ClCompile Include="reflection.h" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>

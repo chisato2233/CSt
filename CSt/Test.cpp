@@ -8,9 +8,17 @@ struct X {
 };
 int main() {
 	using namespace cst;
-	graph<int> g{ 9 };
-	g.insert_v(1, 2, 5).insert_v(2, 1, 5);
+	graph<int,int> g{ 9 };
+	g.build_edge_v(2, 3, 10);
+	g.build_edge_v(4, 6, 9);
+	g.insert_node_val(8, 5);
+	
 	for (auto& i : g) {
-		print("from {} , {}\n ",i.info, i.val);
+		print("node info:{} , {}\n",i.info, i.val);
+	}
+	for (auto& i : g.edges()) {
+		auto& [from, to] = i.first;
+		int val = i.second;
+		print("from {},to {}, {}\n", from, to, g[{from,to}]);
 	}
 }
