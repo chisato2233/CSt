@@ -9,14 +9,14 @@ namespace cst {
 	template<>				struct node_result<void> {		protected:node_result() = default; };
 							 
 	template<typename,typename>		struct edge_result;
-	template<typename N>			struct edge_result<N,void>{};
+	template<typename N>			struct edge_result<void,N>{};
 	
 	template<typename,typename>		struct graph_interface;
-	template<typename E>			struct graph_interface<void,E>{};
+	template<typename E>			struct graph_interface<E,void>{};
 
 
-	template<typename NodeVal=void, typename EdgeVal = void>
-	struct graph : graph_interface<NodeVal,EdgeVal> , edge_result<NodeVal,EdgeVal>{
+	template<typename EdgeVal=void,typename NodeVal=void>
+	struct graph : graph_interface<EdgeVal,NodeVal> , edge_result<EdgeVal, NodeVal>{
 
 		struct graph_node: node_result<NodeVal> {
 			graph_node() {}
@@ -28,8 +28,7 @@ namespace cst {
 			auto begin()const { return to.begin(); }
 			auto end()	const { return to.end(); }
 			auto push_back(size_t info) { return to.push_back(info); }
-			auto front()	const{ return to.front(); }
-			auto back()		const{ return to.back(); }
+			auto& operator[](size_t info) cosnt{ return to[info]; }
 			
 			std::vector<size_t> to;
 			size_t info{}, indegree{};
@@ -46,34 +45,31 @@ namespace cst {
 
 		auto begin()const { return data_.begin(); }
 		auto end()	const { return data_.end(); }
-		auto& operator[](size_t i) { return data_[i]; }
-		auto& operator[](std::pair<size_t, size_t> p) { return edge_result<NodeVal,EdgeVal>::operator[](p); }
+		auto& operator[] const(size_t i) { return data_[i]; }
+		auto& operator[] const(std::pair<size_t, size_t> p) { return edge_result<NodeVal,EdgeVal>::operator[](p); }
 	private:
 		std::vector<graph_node> data_;
 	};
 	
 
-	template<typename Val,typename _> struct graph_interface { //we don't care about the second template parameter.
+	template<typename _,typename Val> struct graph_interface { //we don't care about the second template parameter.
 		virtual void insert_node_val(size_t info,Val v) {
-			auto& g_r = *dynamic_cast<graph<Val,_>*>(this);
+			auto& g_r = *dynamic_cast<graph<_,Val>*>(this);
 			g_r[info].val = v;
 		}
 	protected:
 		graph_interface() = default;
 	};
 
-	template<typename _,typename Val> struct edge_result { //the same as top.
+	template<typename Val,typename _> struct edge_result { //the same as top.
 		auto& edges() { return *this; }
 
 		virtual void build_edge_v(size_t from, size_t to, Val val) {
-			auto& g_r = *dynamic_cast<graph<_,Val>*>(this);
+			auto& g_r = *dynamic_cast<graph<Val,_>*>(this);
 			g_r.build_edge(from, to), map_data_[{from, to}] = val;
 		}
-
-		Val& operator[](std::pair<size_t,size_t> _edge) {
-			return map_data_[_edge];
-		}
-
+		Val& operator[](std::pair<size_t, size_t> pair) { return map_data_[pair]; }
+		
 		auto begin()const { return map_data_.begin(); }
 		auto end()const { return map_data_.end(); }
 		auto find(size_t from, size_t to) { return map_data_.find({ from,to }); }

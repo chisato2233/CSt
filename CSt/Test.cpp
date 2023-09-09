@@ -3,22 +3,16 @@
 #include"graph.h"
 
 
-struct X {
-	int a = 1, b = 2, c = 3;
-};
 int main() {
-	using namespace cst;
-	graph<int,int> g{ 9 };
-	g.build_edge_v(2, 3, 10);
-	g.build_edge_v(4, 6, 9);
-	g.insert_node_val(8, 5);
-	
-	for (auto& i : g) {
-		print("node info:{} , {}\n",i.info, i.val);
-	}
-	for (auto& i : g.edges()) {
-		auto& [from, to] = i.first;
-		int val = i.second;
-		print("from {},to {}, {}\n", from, to, g[{from,to}]);
+	cst::graph g{ 9 };
+	g.build_edge(4, 5), g.build_edge(5, 4);
+	g.build_edge(7, 8), g.build_edge(7, 3);
+	g.build_edge(0, 2);
+	for (const auto& i : g) {
+		//i is graph_node&, a sub-struct in graph.
+		cst::print("Node {}: ", i.info);
+		for (const auto info : i)cst::print("{},", info);
+		cst::print("\n");
 	}
 }
+

@@ -56,9 +56,44 @@ A struct build graph implemented by using Adjacency List.
 
 The template parameter NodeVal and EdgeVal is entirely optional. That means if you do not put any parameter, they will not give you any extra overhead. If you what to build a graph which can store wight in node or edge, you can put them in NodeVal or EdgeVal. That will change some part of the graph and you will get some new  function which can help you use the graph easily.
 
-### [member function]: 
+### [useful member function]: 
 
-- begin() / end() return the vector iterator of graph data.
+- explicit graph(size_t size) explicit constructor is to ensure you know that the graph's node size is recommended not to change.
 
-- graph&
+- begin() / end() return the vector iterator of graph data. This two function ensure struct graph can be for_each in range library.
 
+- void build_edge(size_t from , size_t to) build a edge .
+
+- graph_node& operator[](size_t info); get the node info of the graph. The graph_node is a sub-struct in graph,it contain some basic information and the what the node to.
+
+	```c++
+	#inlcude<graph.h>
+	int main(){
+		cst::graph g{ 9 };
+	    
+		g.build_edge(4, 5), g.build_edge(5, 4);
+		g.build_edge(7, 8), g.build_edge(7, 3);
+		g.build_edge(0, 2);
+		for (const auto& i : g) {
+			//i is graph_node&, a sub-struct in graph.
+			cst::print("Node {}: ", i.info);
+			for (const auto info : i)cst::print("{},", info);
+			cst::print("\n");
+		}
+	}
+	
+	//output:
+	/*
+	Node 0: 2,
+	Node 1:
+	Node 2:
+	Node 3:
+	Node 4: 5,
+	Node 5: 4,
+	Node 6:
+	Node 7: 8,3,
+	Node 8:
+	*/
+	```
+
+- 
