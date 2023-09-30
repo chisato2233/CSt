@@ -28,7 +28,7 @@ namespace cst {
 			auto begin()const { return to.begin(); }
 			auto end()	const { return to.end(); }
 			auto push_back(size_t info) { return to.push_back(info); }
-			auto& operator[](size_t info) cosnt{ return to[info]; }
+			auto& operator[](size_t info) { return to[info]; }
 			
 			std::vector<size_t> to;
 			size_t info{}, indegree{};
@@ -45,8 +45,7 @@ namespace cst {
 
 		auto begin()const { return data_.begin(); }
 		auto end()	const { return data_.end(); }
-		auto& operator[] const(size_t i) { return data_[i]; }
-		auto& operator[] const(std::pair<size_t, size_t> p) { return edge_result<NodeVal,EdgeVal>::operator[](p); }
+		auto& operator[] (size_t i) { return data_[i]; }
 	private:
 		std::vector<graph_node> data_;
 	};
