@@ -38,5 +38,11 @@
     <ClInclude Include="polynomial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="imaginary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="delegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
