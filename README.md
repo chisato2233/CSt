@@ -16,7 +16,7 @@ auto cst::print(std::string_view s,auto&&... args)->void
 
 A formatter print function with std::vformat in c++20.
 
-template:
+
 
 ```c++
 #include<Print.h>
@@ -42,7 +42,50 @@ namespace cst {
 	}
 }
 ```
+## cst::delegate     [struct]
 
+``` c++
+template<typename R, typename... Args>
+struct delegate
+```
+A struct delegate which action is close to C#
+
+### Test Usage:
+``` c++
+	inline int foo(int i) {
+		std::cout << "Hello world foo" << std::endl;
+		return i * 1;
+	}
+
+	inline void test_delegate() {
+		delegate<int, int> d; 	//declare delegate with: 
+								//return type int and 
+								//arguments int
+
+		//a functional in C++ 17
+		std::function<int(int)> f = [](int i) {
+			std::cout << "Hello world" << std::endl;
+			return i * 2;
+		};
+
+		d += f;		//register to delegate
+
+		d += foo;	//registrite function point
+
+		auto p = d(114514);	// call all the function that be registered.
+							// p: vector<int>
+
+		for(auto i:p) std::cout<< i << std::endl;
+	}
+	/*
+	* Hello world
+	* Hello world foo
+	* 229028
+	* 114514
+	*/
+	
+
+```
 
 
 ## cst::graph     [struct]
