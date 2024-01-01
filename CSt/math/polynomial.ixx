@@ -1,12 +1,9 @@
-#pragma once
-#include <algorithm>
-#include <complex>
-#include <iostream>
-#include"Print.h"
-#include <map>
-#include<format>
+export module cst.math.polynomial;
 
-namespace cst {
+import std;
+export import cst.print;
+
+export namespace cst {
 	struct polynomial {
 		friend class std::formatter<cst::polynomial>;
 		char formatter_char = 'x';
@@ -63,13 +60,6 @@ namespace cst {
 	};
 
 
-
-
-
-
-
-
-
 	inline auto polynomial::operator+=(const polynomial& other) & -> polynomial& {
 		for(auto [ v , k] :other) terms[v] += k;
 		check_zero();
@@ -117,7 +107,7 @@ namespace cst {
 	}
 
 	inline void test_polynomial(){
-		std::cout << "test polynomial\n";
+		std::cout << "\n test polynomial----------------------------------- \n";
 
 		
 		polynomial p1{ {1,2},{3.95,6} };
@@ -135,12 +125,11 @@ namespace cst {
 }
 
 
-template <typename CharT>
-struct ::std::formatter<cst::polynomial,CharT> :std::formatter<CharT>{
-	//constexpr auto parse(auto& ctx) { return ctx.begin(); }
+template<>
+struct ::std::formatter<cst::polynomial>{
+	constexpr auto parse(auto& ctx) { return ctx.begin(); }
 
-	template <typename FormatContext>
-	auto format(const cst::polynomial& p, FormatContext& ctx) const{
+	auto format(const cst::polynomial& p, auto& ctx) const{
 		std::string ret;
 		constexpr auto precision=1E-10;
 

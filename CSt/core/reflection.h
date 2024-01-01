@@ -1,5 +1,5 @@
 #pragma once
-#include<any>
+import std;
 namespace cst {
 	struct any { template<class T> operator T(); };
 

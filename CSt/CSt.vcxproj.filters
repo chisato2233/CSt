@@ -15,34 +15,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Coroutine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Print.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reflection.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="graph.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="core\corotine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\reflection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="corotine.h">
+    <ClCompile Include="core\Coroutine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cst_template.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\delegate.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\imaginary.ixx">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="polynomial.h">
+    </ClCompile>
+    <ClCompile Include="math\cst_math.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\print.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\polynomial.ixx">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imaginary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="delegate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

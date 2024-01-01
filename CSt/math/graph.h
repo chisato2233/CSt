@@ -1,8 +1,6 @@
 
 #pragma once
-#include<vector>
-#include<iostream>
-#include<map>
+import std;
 namespace cst {
 	template<typename, typename>	struct graph;
 	template<typename Val>	struct node_result { Val val{};	protected:node_result() = default; };

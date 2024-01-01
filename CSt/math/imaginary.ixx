@@ -1,11 +1,8 @@
-#pragma once
-#include<format>
+export module cst.math.imaginary;
+import std;
+import cst.print;
 
-#include "Print.h"
-
-namespace cst {
-
-
+export namespace cst {
 
 	struct imaginary {
 
@@ -28,7 +25,7 @@ namespace cst {
 		friend auto operator-(imaginary& rhs) ->imaginary { rhs.im = -rhs.im; rhs.re = -rhs.re; return rhs; }
 		friend auto operator-(imaginary&& rhs) ->imaginary { return imaginary{0,0} - rhs; }
 
-		long double mod() const { return sqrt(re * re + im * im); }
+		long double mod() const { return std::sqrt(re * re + im * im); }
 
 		long double re = 0;
 		long double im = 0;
@@ -71,45 +68,32 @@ namespace cst {
 
 }
 
+template<>
+struct std::formatter<cst::imaginary>{
+	
+	constexpr auto parse(auto& ctx){
+		auto it = ctx.begin();
+		return it;
+	}
 
-//template <typename CharT>
-//struct std::formatter<cst::imaginary, CharT> : std::formatter<CharT> {
-//
-//	template <typename FormatContext>
-//	auto format(const cst::imaginary& vec, FormatContext& ctx) const {
-//		return std::format_to(ctx.out(), "[{} + {}i]", vec.re, vec.im);
-//	}
-//};
-
-template<typename CharT>
-struct std::formatter<cst::imaginary, CharT> : std::formatter<CharT> {
-
-	template<typename FormatContext>
-	auto format(const cst::imaginary& i, FormatContext& ctx) const {
-		
-
-		if(std::abs(i.re) <= 1E-10)
-			return std::format_to(ctx.out(), "{}i", i.im);
-		else if(std::abs(i.im) <= 1E-10)
-			return std::format_to(ctx.out(), "{}", i.re);
-		else if(i.im < 0)
-			return std::format_to(ctx.out(), "[{} - {}i]", i.re, -i.im);
-		else
-			return std::format_to(ctx.out(), "[{} + {}i]", i.re, i.im);
+	auto format(const cst::imaginary& vec, format_context& ctx) const {
+		return std::format_to(ctx.out(), "{} + {}i", vec.re, vec.im);
 	}
 };
 
 
-namespace cst {
+
+
+export namespace cst {
 	
 	inline auto test_imaginary() {
-		std::cout << "test imaginary\n";
+		std::cout << "\n test imaginary-----------------------------\n";
 		auto i = 5 + 1.1_i;
 		auto j = -1_i + 3;
 
 		auto k = i - j;
-		print(k);
-		std::cout << '\n';
+		print(i,j);
+		print('\n');
 	}
 }
 /**
